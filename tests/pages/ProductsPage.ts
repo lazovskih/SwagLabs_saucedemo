@@ -30,7 +30,6 @@ export class ProductsPage extends BasePage {
   }
 
   async addProductToCart(productName: string) {
-    // await this.inventoryItems.first().waitFor(); // DEBUG
     await this.getAddToCartButton(productName).click();
   }
 

@@ -1,8 +1,9 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { ShippingData } from "../utilities/dataLoader";
 
-export class CheckoutPage extends BasePage {
-  pageTitleText = "Checkout";
+export class CheckoutStepOnePage extends BasePage {
+  pageTitleText = "Checkout: Your Information";
   pageUrl = "/checkout-step-one.html";
 
   // Page locators
@@ -23,11 +24,13 @@ export class CheckoutPage extends BasePage {
     this.completeHeader = page.locator('[data-test="complete-header"]');
   }
 
-  async fillShippingInformation(firstName: string, lastName: string, postalCode: string) {
-    await this.firstNameField.fill(firstName);
-    await this.lastNameField.fill(lastName);
-    await this.postalCodeField.fill(postalCode);
-    await this.continueButton.click();
+  async fillShippingInformation(shippingInfo: ShippingData, clickContinue: boolean = true) {
+    await this.firstNameField.fill(shippingInfo.FirstName);
+    await this.lastNameField.fill(shippingInfo.LastName);
+    await this.postalCodeField.fill(shippingInfo.PostalCode);
+    if (clickContinue) {
+      await this.continueButton.click();
+    }
   }
 
   async finishOrder() {
@@ -36,5 +39,9 @@ export class CheckoutPage extends BasePage {
 
   async getCompleteHeaderText() {
     return await this.completeHeader.textContent();
+  }
+
+  async clickContinue() {
+    await this.continueButton.click();
   }
 }
