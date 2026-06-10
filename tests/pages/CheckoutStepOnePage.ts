@@ -24,19 +24,30 @@ export class CheckoutStepOnePage extends BasePage {
     this.completeHeader = page.locator('[data-test="complete-header"]');
   }
 
-  async fillShippingInformation(shippingInfo: ShippingData, clickContinue: boolean = true) {
-    await this.firstNameField.fill(shippingInfo.FirstName);
-    await this.lastNameField.fill(shippingInfo.LastName);
-    await this.postalCodeField.fill(shippingInfo.PostalCode);
-    if (clickContinue) {
-      await this.continueButton.click();
-    }
+  /**
+   * Fill shipping information
+   * @param firstName
+   * @param lastName
+   * @param postalCode
+   */
+  async fillShippingInformation(shippingData: ShippingData) {
+    await this.firstNameField.fill(shippingData.FirstName);
+    await this.lastNameField.fill(shippingData.LastName);
+    await this.postalCodeField.fill(shippingData.PostalCode);
+    await this.continueButton.click();
   }
 
+  /**
+   * Finish order
+   */
   async finishOrder() {
     await this.finishButton.click();
   }
 
+  /**
+   * Get complete header text
+   * @returns Promise<string | null>
+   */
   async getCompleteHeaderText() {
     return await this.completeHeader.textContent();
   }

@@ -17,28 +17,55 @@ export class ProductsPage extends BasePage {
     this.shoppingCartLink = page.locator('[data-test="shopping-cart-link"]');
   }
 
+  /**
+   * Get product ID
+   * @param productName
+   * @returns Promise<string>
+   */
   getProductId(productName: string) {
     return productName.toLowerCase().replace(/\s+/g, "-");
   }
 
+  /**
+   * Get add to cart button
+   * @param productName
+   * @returns Promise<Locator>
+   */
   getAddToCartButton(productName: string) {
     return this.page.locator(`[data-test="add-to-cart-${this.getProductId(productName)}"]`);
   }
 
+  /**
+   * Get remove button
+   * @param productName
+   * @returns Promise<Locator>
+   */
   getRemoveButton(productName: string) {
     return this.page.locator(`[data-test="remove-${this.getProductId(productName)}"]`);
   }
 
+  /**
+   * Add product to cart
+   * @param productName
+   */
   async addProductToCart(productName: string) {
     await this.getAddToCartButton(productName).click();
   }
 
+  /**
+   * Add multiple products to cart
+   * @param productNames
+   */
   async addProductsToCart(productNames: string[]) {
     for (const name of productNames) {
       await this.addProductToCart(name);
     }
   }
 
+  /**
+   * Get cart count
+   * @returns Promise<number>
+   */
   async getCartCount() {
     const count = await this.cartBadge.count();
     if (count === 0) return 0;
@@ -46,6 +73,9 @@ export class ProductsPage extends BasePage {
     return text ? Number(text.trim()) : 0;
   }
 
+  /**
+   * View cart
+   */
   async viewCart() {
     await this.shoppingCartLink.click();
   }

@@ -22,7 +22,7 @@
   "homepage": "https://github.com/lazovskih/online_store_playwright#readme",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.9.3",
     "dotenv": "^17.4.2"
   }
 }
