@@ -11,6 +11,8 @@ export class LoginPage extends BasePage {
   readonly passwordField: Locator;
   readonly loginButton: Locator;
   readonly errorMessage: Locator;
+  readonly errorMessageText = "Epic sadface: Username and password do not match any user in this service";
+  readonly noAccessMessageText = "Epic sadface: You can only access '/inventory.html' when you are logged in.";
 
   constructor(page: Page) {
     super(page);
@@ -20,6 +22,11 @@ export class LoginPage extends BasePage {
     this.errorMessage = page.locator('[data-test="error"]');
   }
 
+  /**
+   * Login with username and password
+   * @param username
+   * @param password
+   */
   async login(username: string, password: string) {
     await this.open();
     await this.page.waitForLoadState();
@@ -33,11 +40,42 @@ export class LoginPage extends BasePage {
     await productsPage.inventoryItems.first().waitFor();
   }
 
+  /**
+   * Login as standard user
+   */
   async loginAsStandardUser() {
     await this.login(process.env.STANDARD_USER!, process.env.DEMO_PASSWORD!);
   }
 
-  async getErrorMessage() {
+  /**
+   * Login as locked out user
+   */
+  async loginAsLockedOutUser() {
+    await this.login(process.env.LOCKED_OUT_USER!, process.env.DEMO_PASSWORD!);
+  }
+
+  /**
+   * Check if error message is visible
+   */
+  async isErrorMessageVisible() {
+    return await this.errorMessage.isVisible();
+  }
+
+  async getErrorMessageText() {
     return await this.errorMessage.textContent();
+  }
+
+  /**
+   * Clear username field
+   */
+  async clearUsername(): Promise<void> {
+    await this.usernameField.clear();
+  }
+
+  /**
+   * Clear password field
+   */
+  async clearPassword(): Promise<void> {
+    await this.passwordField.clear();
   }
 }

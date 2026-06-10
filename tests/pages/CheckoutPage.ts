@@ -23,6 +23,12 @@ export class CheckoutPage extends BasePage {
     this.completeHeader = page.locator('[data-test="complete-header"]');
   }
 
+  /**
+   * Fill shipping information
+   * @param firstName
+   * @param lastName
+   * @param postalCode
+   */
   async fillShippingInformation(firstName: string, lastName: string, postalCode: string) {
     await this.firstNameField.fill(firstName);
     await this.lastNameField.fill(lastName);
@@ -30,10 +36,17 @@ export class CheckoutPage extends BasePage {
     await this.continueButton.click();
   }
 
+  /**
+   * Finish order
+   */
   async finishOrder() {
     await this.finishButton.click();
   }
 
+  /**
+   * Get complete header text
+   * @returns Promise<string | null>
+   */
   async getCompleteHeaderText() {
     return await this.completeHeader.textContent();
   }
