@@ -5,8 +5,14 @@ export interface ProductData {
   Id: string;
   Name: string;
   Description: string;
-  Price: string;
+  Price: number;
   imageUrl: string;
+}
+
+export interface ShippingData {
+  FirstName: string;
+  LastName: string;
+  PostalCode: string;
 }
 
 const DATA_DIR = path.resolve(__dirname, "../../data");

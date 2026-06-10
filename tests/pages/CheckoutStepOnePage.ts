@@ -1,8 +1,9 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { ShippingData } from "../utilities/dataLoader";
 
-export class CheckoutPage extends BasePage {
-  pageTitleText = "Checkout";
+export class CheckoutStepOnePage extends BasePage {
+  pageTitleText = "Checkout: Your Information";
   pageUrl = "/checkout-step-one.html";
 
   // Page locators
@@ -49,5 +50,9 @@ export class CheckoutPage extends BasePage {
    */
   async getCompleteHeaderText() {
     return await this.completeHeader.textContent();
+  }
+
+  async clickContinue() {
+    await this.continueButton.click();
   }
 }

@@ -3,42 +3,42 @@
     "Id": "sauce-labs-backpack",
     "Name": "Sauce Labs Backpack",
     "Description": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
-    "Price": "$29.99",
+    "Price": 29.99,
     "imageUrl": "https://www.saucedemo.com/static/media/sauce-backpack-1200x1500.0a0b85a385945026062b.jpg"
   },
   {
     "Id": "sauce-labs-bike-light",
     "Name": "Sauce Labs Bike Light",
     "Description": "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.",
-    "Price": "$9.99",
+    "Price": 9.99,
     "imageUrl": "https://www.saucedemo.com/static/media/bike-light-1200x1500.37c843b09a7d77409d63.jpg"
   },
   {
     "Id": "sauce-labs-bolt-t-shirt",
     "Name": "Sauce Labs Bolt T-Shirt",
     "Description": "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.",
-    "Price": "$15.99",
+    "Price": 15.99,
     "imageUrl": "https://www.saucedemo.com/static/media/bolt-shirt-1200x1500.c2599ac5f0a35ed5931e.jpg"
   },
   {
     "Id": "sauce-labs-fleece-jacket",
     "Name": "Sauce Labs Fleece Jacket",
     "Description": "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.",
-    "Price": "$49.99",
+    "Price": 49.99,
     "imageUrl": "https://www.saucedemo.com/static/media/sauce-pullover-1200x1500.51d7ffaf301e698772c8.jpg"
   },
   {
     "Id": "sauce-labs-onesie",
     "Name": "Sauce Labs Onesie",
     "Description": "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel.",
-    "Price": "$7.99",
+    "Price": 7.99,
     "imageUrl": "https://www.saucedemo.com/static/media/red-onesie-1200x1500.2ec615b271ef4c3bc430.jpg"
   },
   {
     "Id": "testallthethings-t-shirt-red",
     "Name": "Test.allTheThings() T-Shirt (Red)",
     "Description": "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton.",
-    "Price": "$15.99",
+    "Price": 15.99,
     "imageUrl": "https://www.saucedemo.com/static/media/red-tatt-1200x1500.30dadef477804e54fc7b.jpg"
   }
 ]

@@ -49,7 +49,6 @@ export class ProductsPage extends BasePage {
    * @param productName
    */
   async addProductToCart(productName: string) {
-    // await this.inventoryItems.first().waitFor(); // DEBUG
     await this.getAddToCartButton(productName).click();
   }
 
