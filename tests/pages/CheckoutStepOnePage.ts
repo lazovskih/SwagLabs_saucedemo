@@ -30,10 +30,10 @@ export class CheckoutStepOnePage extends BasePage {
    * @param lastName
    * @param postalCode
    */
-  async fillShippingInformation(firstName: string, lastName: string, postalCode: string) {
-    await this.firstNameField.fill(firstName);
-    await this.lastNameField.fill(lastName);
-    await this.postalCodeField.fill(postalCode);
+  async fillShippingInformation(shippingData: ShippingData) {
+    await this.firstNameField.fill(shippingData.FirstName);
+    await this.lastNameField.fill(shippingData.LastName);
+    await this.postalCodeField.fill(shippingData.PostalCode);
     await this.continueButton.click();
   }
 
