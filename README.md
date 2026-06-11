@@ -6,7 +6,7 @@ A demo end-to-end test automation project for the [SauceDemo](https://www.sauced
 
 ## 📹 Video Recording
 
-> 🎬 **Watch the test execution demo on YouTube:** _[Link will be added here]_
+> 🎬 **Watch the test execution demo on YouTube:** [https://youtu.be/UbdB-XWtiXM](https://youtu.be/UbdB-XWtiXM)
 
 ---
 
@@ -22,12 +22,12 @@ The tests are written using the **Page Object Model (POM)** pattern for maintain
 
 ### Tech Stack
 
-| Tool | Version |
-|---|---|
-| [Playwright](https://playwright.dev/) | ^1.59.1 |
-| TypeScript | via `@types/node` |
-| Node.js | LTS |
-| dotenv | ^17.4.2 |
+| Tool                                  | Version           |
+| ------------------------------------- | ----------------- |
+| [Playwright](https://playwright.dev/) | ^1.59.1           |
+| TypeScript                            | via `@types/node` |
+| Node.js                               | LTS               |
+| dotenv                                | ^17.4.2           |
 
 ### CI/CD
 
@@ -48,7 +48,7 @@ Tests are automatically executed on every push and pull request to the `main` / 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/lazovskih/online_store_playwright.git
+git clone https://github.com/lazovskih/SwagLabs_saucedemo.git
 cd online_store_playwright
 ```
 
@@ -77,6 +77,7 @@ Add your credentials to `.env`:
 ```env
 STANDARD_USER=set_username
 DEMO_PASSWORD=set_password
+URL=https://www.saucedemo.com
 ```
 
 > ⚠️ **Never commit your `.env` file.** It is already listed in `.gitignore`.
