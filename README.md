@@ -6,7 +6,7 @@ A demo end-to-end test automation project for the [SauceDemo](https://www.sauced
 
 ## 📹 Video Recording
 
-> 🎬 **Watch the test execution demo on YouTube:** [https://youtu.be/UbdB-XWtiXM](https://youtu.be/UbdB-XWtiXM)
+> 🎬 **Watch the test execution demo on YouTube:** [https://youtu.be/Uxl-Jh51bOE](https://youtu.be/Uxl-Jh51bOE)
 
 ---
 
