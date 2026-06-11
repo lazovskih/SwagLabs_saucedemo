@@ -8,7 +8,7 @@ const STATE_FILE = path.join(AUTH_DIR, "user.json");
 const LOCK_FILE = path.join(AUTH_DIR, "user.lock");
 /**
  * Checks if the session file exists and all cookies inside it are not expired.
- * 
+ *
  * @param filePath Path to the session state file
  * @returns boolean True if session is valid and not expired, false otherwise
  */
@@ -28,7 +28,9 @@ function isSessionValid(filePath: string): boolean {
     for (const cookie of state.cookies) {
       // Check if the cookie has an expiration date and if it is in the past
       if (cookie.expires !== undefined && cookie.expires !== -1 && cookie.expires < nowSeconds) {
-        console.log(`[Auth Fixture] Session cookie '${cookie.name}' has expired (expires at: ${new Date(cookie.expires * 1000).toISOString()}).`);
+        console.log(
+          `[Auth Fixture] Session cookie '${cookie.name}' has expired (expires at: ${new Date(cookie.expires * 1000).toISOString()}).`,
+        );
         return false;
       }
     }
@@ -101,7 +103,7 @@ export const test = baseTest.extend({
 
         // Periodically check if lock is stale during wait loop
         checkAndClearStaleLock();
-        
+
         // Wait 500ms before retrying
         await new Promise((resolve) => setTimeout(resolve, 500));
       }
@@ -113,10 +115,10 @@ export const test = baseTest.extend({
             console.log("[Auth Fixture] Session file missing or expired. Performing fresh login.");
             const context = await browser.newContext();
             const page = await context.newPage();
-            
+
             const loginPage = new LoginPage(page);
-            await loginPage.loginAsStandardUser();
-            
+            await loginPage.login(process.env.STANDARD_USER!, process.env.DEMO_PASSWORD!);
+
             // Capture and save standard user state (cookies, localStorage)
             await context.storageState({ path: STATE_FILE });
             await context.close();
@@ -142,7 +144,7 @@ export const test = baseTest.extend({
           const context = await browser.newContext();
           const page = await context.newPage();
           const loginPage = new LoginPage(page);
-          await loginPage.loginAsStandardUser();
+          await loginPage.login(process.env.STANDARD_USER!, process.env.DEMO_PASSWORD!);
           await context.storageState({ path: STATE_FILE });
           await context.close();
         }
@@ -152,6 +154,30 @@ export const test = baseTest.extend({
     // Supply the state file path to the browser context
     await use(STATE_FILE);
   },
+});
+
+// Global afterEach: attempt final cleanup and swallow teardown errors so they don't fail tests
+test.afterEach(async () => {
+  try {
+    // Ensure any stale lock file is cleared to avoid blocking other workers
+    if (fs.existsSync(LOCK_FILE)) {
+      try {
+        checkAndClearStaleLock();
+      } catch (e) {
+        // ignore
+      }
+      if (fs.existsSync(LOCK_FILE)) {
+        try {
+          fs.unlinkSync(LOCK_FILE);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+  } catch (err) {
+    // Swallow any teardown errors to prevent after-hook failures from failing the test
+    console.warn("[Auth Fixture] Ignored error in global afterEach teardown:", err);
+  }
 });
 
 export { expect } from "@playwright/test";
