@@ -1,5 +1,4 @@
-import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
+import { test, expect } from "../fixtures/auth.fixture";
 import { ProductsPage } from "../pages/ProductsPage";
 import { CartPage } from "../pages/CartPage";
 import { CheckoutStepOnePage } from "../pages/CheckoutStepOnePage";
@@ -21,13 +20,11 @@ test.describe("Checkout flow", () => {
     checkoutStepTwoPage = new CheckoutStepTwoPage(page);
     products = loadTestData<ProductData>("products");
     shippingInfo = loadTestData<ShippingData>("shipping");
+    // Navigate directly to the products page using the pre-authenticated state
+    await productsPage.open();
   });
 
   test("completes checkout for a selected product", async ({ page }) => {
-    // Login as standard user
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
-
     // Add products to cart
     await productsPage.addProductToCart(products[2].Name);
     expect(await productsPage.getCartCount()).toBe(1);
@@ -53,13 +50,6 @@ test.describe("Checkout flow", () => {
   });
 
   test("completes checkout and verify totals for multiple selected products", async ({ page }) => {
-    // Login as standard user
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
-
-    // Navigate to Products page
-    productsPage.open();
-
     // Add multiple products to cart
     await productsPage.addProductsToCart([products[1].Name, products[2].Name]);
     expect(await productsPage.getCartCount()).toBe(2);

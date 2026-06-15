@@ -1,5 +1,4 @@
-import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
+import { test, expect } from "../fixtures/auth.fixture";
 import { ProductsPage } from "../pages/ProductsPage";
 import { CartPage } from "../pages/CartPage";
 import { loadTestData, ProductData } from "../utilities/dataLoader";
@@ -7,11 +6,15 @@ import { loadTestData, ProductData } from "../utilities/dataLoader";
 const products = loadTestData<ProductData>("products");
 
 test.describe("Shopping cart flow", () => {
-  test("adds selected products to the cart and verifies cart contents", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
+  let productsPage: ProductsPage;
 
-    const productsPage = new ProductsPage(page);
+  test.beforeEach(async ({ page }) => {
+    productsPage = new ProductsPage(page);
+    // Navigate to the products page directly using the pre-authenticated session state
+    await productsPage.open();
+  });
+
+  test("adds selected products to the cart and verifies cart contents", async ({ page }) => {
     await productsPage.addProductsToCart([products[0].Name, products[1].Name]);
     expect(await productsPage.getCartCount()).toBe(2);
     await productsPage.viewCart();
@@ -24,10 +27,6 @@ test.describe("Shopping cart flow", () => {
   });
 
   test("button changes from 'Add to cart' to 'Remove' when clicked", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
-
-    const productsPage = new ProductsPage(page);
     const productName = products[0].Name;
 
     const addToCartButton = productsPage.getAddToCartButton(productName);
@@ -46,11 +45,6 @@ test.describe("Shopping cart flow", () => {
   });
 
   test("button changes from 'Remove' to 'Add to cart' when clicked", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
-
-    const productsPage = new ProductsPage(page);
-
     // Loop through all products
     for (const product of products) {
       const addToCartButton = productsPage.getAddToCartButton(product.Name);
@@ -70,11 +64,6 @@ test.describe("Shopping cart flow", () => {
   });
 
   test("cart badge updates quantity correctly when items are added and removed", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
-
-    const productsPage = new ProductsPage(page);
-
     let expectedCount = 0;
 
     // Add all items and verify badge count increments
@@ -102,11 +91,6 @@ test.describe("Shopping cart flow", () => {
   });
 
   test("remove button on products page should not be present for items removed from cart", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.loginAsStandardUser();
-
-    const productsPage = new ProductsPage(page);
-    
     // Add 3 items
     const itemsToAdd = [products[0].Name, products[1].Name, products[2].Name];
     await productsPage.addProductsToCart(itemsToAdd);

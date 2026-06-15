@@ -41,13 +41,6 @@ export class LoginPage extends BasePage {
   }
 
   /**
-   * Login as standard user
-   */
-  async loginAsStandardUser() {
-    await this.login(process.env.STANDARD_USER!, process.env.DEMO_PASSWORD!);
-  }
-
-  /**
    * Login as locked out user
    */
   async loginAsLockedOutUser() {
