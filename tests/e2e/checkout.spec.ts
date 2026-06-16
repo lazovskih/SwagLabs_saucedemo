@@ -24,6 +24,10 @@ test.describe("Checkout flow", () => {
     await productsPage.open();
   });
 
+  /**
+   * Scenario 1: completes checkout for one selected product
+   * completes checkout for one selected product
+   */
   test("completes checkout for a selected product", async ({ page }) => {
     // Add products to cart
     await productsPage.addProductToCart(products[2].Name);
@@ -49,6 +53,10 @@ test.describe("Checkout flow", () => {
     expect(await checkoutStepTwoPage.getCompleteHeaderText()).toBe("Thank you for your order!");
   });
 
+  /**
+   * Scenario 2: completes checkout and verify totals for multiple selected products
+   * completes checkout and verify totals for multiple selected products
+   */
   test("completes checkout and verify totals for multiple selected products", async ({ page }) => {
     // Add multiple products to cart
     await productsPage.addProductsToCart([products[1].Name, products[2].Name]);
@@ -84,5 +92,15 @@ test.describe("Checkout flow", () => {
     const actualTotal = parseFloat(await checkoutStepTwoPage.getTotal());
 
     expect(actualTotal, "Verify total is correct").toEqual(expectedTotal);
+  });
+
+  /**
+   * Scenario 4: Products page - visual
+   * Verify products page is displayed correctly
+   */
+  test("products page - visual", async ({ page, eyes }) => {
+    // Navigate to products page
+    await productsPage.open();
+    await eyes.check("Products Page page should match the baseline");
   });
 });

@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+// import { test, expect } from "@playwright/test";
+import { test, expect } from "@applitools/eyes-playwright/fixture";
 import { LoginPage } from "../pages/LoginPage";
 import { ProductsPage } from "../pages/ProductsPage";
 
@@ -82,6 +83,15 @@ test.describe("Login", () => {
     // Verify error message is displayed
     expect(await loginPage.isErrorMessageVisible(), "Error message should be visible").toBe(true);
     expect(await loginPage.getErrorMessageText(), "Error message text should match").toBe(loginPage.noAccessMessageText);
+  });
 
+  /**
+   * Scenario 4: Login page - visual
+   * Verify login page is displayed correctly
+   */
+  test("login page - visual", async ({ page, eyes }) => {
+    // Navigate to login page
+    await loginPage.open();
+    await eyes.check("Login page should match the baseline");
   });
 });

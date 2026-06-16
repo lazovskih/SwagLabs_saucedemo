@@ -1,4 +1,5 @@
-import { test as baseTest, expect } from "@playwright/test";
+// import { test as baseTest, expect } from "@playwright/test";
+import { test as baseTest } from "@applitools/eyes-playwright/fixture";
 import fs from "fs";
 import path from "path";
 import { LoginPage } from "../pages/LoginPage";
