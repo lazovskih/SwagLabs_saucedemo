@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { ProductsPage } from "../pages/ProductsPage";
-
+import { navigateAndVerifyHeader } from "../utilities/navigation";
 /**
  * Login Test Scenarios for SauceDemo
  */
@@ -20,7 +20,7 @@ test.describe("Login", () => {
    */
   test("login with valid credentials - successful", async ({ page }) => {
     // Navigate to login page
-    await loginPage.open();
+    await navigateAndVerifyHeader(loginPage);
 
     // Login with valid credentials
     await loginPage.login(process.env.STANDARD_USER!, process.env.DEMO_PASSWORD!);
@@ -82,6 +82,5 @@ test.describe("Login", () => {
     // Verify error message is displayed
     expect(await loginPage.isErrorMessageVisible(), "Error message should be visible").toBe(true);
     expect(await loginPage.getErrorMessageText(), "Error message text should match").toBe(loginPage.noAccessMessageText);
-
   });
 });

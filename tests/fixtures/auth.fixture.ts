@@ -1,4 +1,4 @@
-import { test as baseTest, expect } from "@playwright/test";
+import { test as baseTest } from "@playwright/test";
 import fs from "fs";
 import path from "path";
 import { LoginPage } from "../pages/LoginPage";
@@ -6,6 +6,7 @@ import { LoginPage } from "../pages/LoginPage";
 const AUTH_DIR = path.resolve(__dirname, "../../playwright/.auth");
 const STATE_FILE = path.join(AUTH_DIR, "user.json");
 const LOCK_FILE = path.join(AUTH_DIR, "user.lock");
+
 /**
  * Checks if the session file exists and all cookies inside it are not expired.
  *

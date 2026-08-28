@@ -4,17 +4,19 @@ import { BasePage } from "./BasePage";
 export class ProductsPage extends BasePage {
   pageTitleText = "Products";
   pageUrl = "/inventory.html";
-  
+
   // Page locators
   readonly inventoryItems: Locator;
   readonly cartBadge: Locator;
   readonly shoppingCartLink: Locator;
+  readonly primaryHeader: Locator;
 
   constructor(page: Page) {
     super(page);
     this.inventoryItems = page.locator('[data-test="inventory-item"]');
     this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
     this.shoppingCartLink = page.locator('[data-test="shopping-cart-link"]');
+    this.primaryHeader = page.locator('[data-test="title"]');
   }
 
   /**
@@ -78,5 +80,12 @@ export class ProductsPage extends BasePage {
    */
   async viewCart() {
     await this.shoppingCartLink.click();
+  }
+
+  /**
+   * Wait for login page to load
+   */
+  async isLoaded(): Promise<void> {
+    return await this.page.waitForLoadState();
   }
 }

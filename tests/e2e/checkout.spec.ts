@@ -1,4 +1,4 @@
-import { test, expect } from "../fixtures/auth.fixture";
+import { test, expect } from "../fixtures";
 import { ProductsPage } from "../pages/ProductsPage";
 import { CartPage } from "../pages/CartPage";
 import { CheckoutStepOnePage } from "../pages/CheckoutStepOnePage";

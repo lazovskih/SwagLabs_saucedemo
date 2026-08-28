@@ -7,7 +7,13 @@
 
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@helpers/*": ["test/uttilities/*"],
+      "@fixtures/*": ["test/fixtures/*"],
+      "@pages/*": ["test/pages/*"]
+    }
   },
   "include": ["**/*.ts"]
 }

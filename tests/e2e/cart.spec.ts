@@ -1,4 +1,4 @@
-import { test, expect } from "../fixtures/auth.fixture";
+import { test, expect } from "../fixtures";
 import { ProductsPage } from "../pages/ProductsPage";
 import { CartPage } from "../pages/CartPage";
 import { loadTestData, ProductData } from "../utilities/dataLoader";
@@ -71,7 +71,7 @@ test.describe("Shopping cart flow", () => {
       const addToCartButton = productsPage.getAddToCartButton(product.Name);
       await addToCartButton.click();
       expectedCount++;
-      
+
       await expect(productsPage.cartBadge).toBeVisible();
       await expect(productsPage.cartBadge).toHaveText(expectedCount.toString());
     }

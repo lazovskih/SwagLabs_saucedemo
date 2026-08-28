@@ -3,18 +3,20 @@ import { BasePage } from "./BasePage";
 
 export class CartPage extends BasePage {
   pageTitleText = "Your Cart";
-  pageUrl = "/cart.html"; 
-  
+  pageUrl = "/cart.html";
+
   // Page locators
   readonly cartItems: Locator;
   readonly checkoutButton: Locator;
   readonly continueShoppingButton: Locator;
+  readonly primaryHeader: Locator;
 
   constructor(page: Page) {
     super(page);
     this.cartItems = page.locator(".cart_item");
     this.checkoutButton = page.locator('[data-test="checkout"]');
     this.continueShoppingButton = page.locator('[data-test="continue-shopping"]');
+    this.primaryHeader = page.locator('[data-test="title"]');
   }
 
   /**
@@ -55,5 +57,12 @@ export class CartPage extends BasePage {
    */
   async continueShopping() {
     await this.continueShoppingButton.click();
+  }
+
+  /**
+   * Wait for login page to load
+   */
+  async isLoaded(): Promise<void> {
+    return await this.page.waitForLoadState();
   }
 }

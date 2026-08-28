@@ -11,6 +11,7 @@ export abstract class BasePage {
   private readonly allItemsMenu: Locator;
   private readonly AboutMenu: Locator;
   private readonly logoutMenu: Locator;
+  abstract primaryHeader: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,11 +20,20 @@ export abstract class BasePage {
     this.sideMenu = page.locator(".bm-menu");
     this.allItemsMenu = page.locator('[data-test="inventory-sidebar-link"]');
     this.AboutMenu = page.locator('[data-test="about-sidebar-link"]');
-    this.logoutMenu = page.locator('#logout_sidebar_link');
+    this.logoutMenu = page.locator("#logout_sidebar_link");
   }
 
   async open() {
-    await this.page.goto(process.env.URL + this.pageUrl, { waitUntil: 'domcontentloaded' });
+    await this.page.goto(process.env.URL + this.pageUrl, { waitUntil: "domcontentloaded" });
+    await this.isLoaded();
+  }
+
+  /**
+   * Wait for a page to load
+   * @returns
+   */
+  async isLoaded() {
+    this.page.waitForLoadState();
   }
 
   /**

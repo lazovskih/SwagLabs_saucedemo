@@ -20,12 +20,14 @@ export class CheckoutStepTwoPage extends BasePage {
   private readonly completeHeader: Locator;
   private readonly completeText: Locator;
   private readonly backHomeButton: Locator;
+  readonly primaryHeader: Locator;
 
   constructor(page: Page) {
     super(page);
 
     // Initialize locators using data-test attribute - Step One
     this.pageTitleElement = page.locator('[data-test="title"]');
+    this.primaryHeader = page.locator('[data-test="title"]');
 
     // Step Two locators
     this.summaryInfo = page.locator('[data-test="summary-info"]');
@@ -121,5 +123,12 @@ export class CheckoutStepTwoPage extends BasePage {
    */
   async getCompleteHeaderText() {
     return await this.completeHeader.textContent();
+  }
+
+  /**
+   * Wait for login page to load
+   */
+  async isLoaded(): Promise<void> {
+    return await this.page.waitForLoadState();
   }
 }
