@@ -24,5 +24,8 @@
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.9.3",
     "dotenv": "^17.4.2"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.13.0"
   }
 }
